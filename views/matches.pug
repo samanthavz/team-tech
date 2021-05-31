@@ -1,0 +1,13 @@
+extends template.pug
+
+block content
+  //- searchbar 
+  input(type="text" id="inputField" class="filter" placeholder="Search for names..")
+  //- matches list 
+  ul(id="list") 
+    - liked
+    each dog in liked
+      +match(dog.imgSrc, dog.name, dog.content, dog.price, dog.userId)
+    else 
+      p(class="emptyP") Your doggo list is empty..
+  script(src="scripts/matches.js", type="module")

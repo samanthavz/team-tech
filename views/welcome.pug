@@ -1,4 +1,15 @@
-html 
+doctype html
+html
   include includes/head.pug
-  body 
-    h1 hello world!
+  body(class="welcome")
+    img(src='/images/wave.png' class="wave" alt="")
+    //- ik geef hier een height en width mee, sorry als dit niet mag maar anders ziet het er niet uit zonder css :(
+    img(src='/images/bone.png' class="boneImg" alt="DoggoSwipe logo" height="100px" )
+    h1 DoggoSwipe
+    p Swipe your way to your doggo
+      div
+        a(href="/home") Start
+    img(src='/images/dog.png' class="doggoPic" alt="Pixelated dog" height="300px" width="300px")
+    
+    script
+        include ../static/public/scripts/script.js 
