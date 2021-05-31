@@ -1,4 +1,26 @@
-html 
-  include includes/head.pug
-  body 
-    h1 This is home!
+extends template.pug 
+  
+block content
+  button(class="infoButton" id="infoButton") 
+    img(src="images/info-01.png" alt="infobutton")
+  div(class="home")
+    if doggo
+      div(class="cardDiv", draggable="true")
+        div(class="imgDiv") 
+          img(src=doggo.imgSrc, class="image", id="dogImg", alt="dog photo", height="300px")
+          p #{doggo.price}
+          img(src=doggo.gender, class="gender", alt="gender")
+        div(class="info") 
+          div
+            h2 #{doggo.name}
+            p #{doggo.breed}
+          p #{doggo.age} years
+      form(action="/matches/liked", method="post", id="boneheader")
+        input(type="hidden", name="userId", value=doggo.userId)
+        button(type="submit", id="bone", draggable="true") 
+          img(src="images/bone.png", alt="image of a bone", height="80px")
+      form(action="/matches/disliked", method="post")
+        input(type="hidden", name="userId", value=doggo.userId)
+        button(type="submit" class="disliked") Don't click me
+    else 
+      h2(class="emptyH2") There are currently no doggos that match your preferences..

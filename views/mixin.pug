@@ -1,0 +1,28 @@
+mixin link(href, name)
+  a(class!=attributes.class href=href)= name
+
+
+mixin match(imgSrc, name, content, price, imgId)
+    li 
+      div(class="listContainer")
+        img(src=imgSrc, alt="profile picture")
+        div 
+          h2= name
+          p(class="content")= content 
+        p= price
+      div(class="delete")
+        form(action="/matches/deleted", method="post")
+          button(type="submit") delete
+          input(type="hidden", name="dog", value=imgId)
+
+
+mixin info 
+  div(class="overlay" id="overlay")
+    div(class="tip infoContent")
+      h2 Pro tip!
+      p To like: 
+      p swipe the bone to the doggo 
+      p To move on:
+      p Swipe away the card
+      button(id="close") got it 
+    img(src="images/dog.png" alt="picture of dog" class="tip infoImg")

@@ -17,6 +17,7 @@ app.use(express.static(__dirname + "/static/public/"));
 app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
 app.use(express.json());
 
+// MVC model: https://www.youtube.com/watch?v=dDjzTDN3cy8
 app.use("/", router)
 
 //connect

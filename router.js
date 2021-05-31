@@ -5,8 +5,9 @@ const router = express.Router()
 const controller = require("./controllers/controller")
 
 router.get("/", controller.renderWelcomePage);
-
 router.get("/home", controller.renderHomePage);
+router.get("/matches", controller.renderMatchesPage);
+router.get("/profile", controller.renderProfilePage);
 
 //error handling
 router.use((req, res, next) => {
