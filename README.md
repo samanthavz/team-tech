@@ -57,4 +57,3 @@ The database used for this app is [MongoDB](https://www.mongodb.com/).
 - [Martijn van der Lans](https://github.com/MartijnvdLans)
 - [Zain Butt](https://github.com/zainuwachtig)
 
-![gif with waving man](./files/hello.gif)
