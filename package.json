@@ -20,7 +20,12 @@
     "javascript",
     "css"
   ],
-  "author": "Samantha van Zandwijk",
+  "contributors": [
+    "Samantha van Zandwijk",
+    "Jabir Tisoudali",
+    "Martijn van der Lans",
+    "Zain Butt"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/samanthavz/team-tech/issues"
