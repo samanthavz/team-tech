@@ -1,3 +1,4 @@
+// Model.js is used for database communication
 const { MongoClient } = require("mongodb");
 const dotenv = require("dotenv");
 
@@ -15,29 +16,35 @@ exports.DatabaseHandler = class {
     this.connection = this.client.connect();
   }
 
-  async fetchProfiles(filterquery){
+  // filterquery for Jabir to make it easier to find the current profile
+  async fetchProfiles(filterquery) {
     const database = this.client.db("DoggoSwipe");
     const users = database.collection("Users");
 
     // fetch the data user
     const userCursor = await users.find(filterquery);
 
-    return userCursor
+    return userCursor;
   }
 
-  async fetchDoggos(){
+  async fetchDoggos() {
     // connect to the database and collection for doggo and user
     const database = this.client.db("DoggoSwipe");
     const doggos = database.collection("Doggos");
 
-
     // fetch the data doggos
-    const doggoCursor = doggos.find({});
+    const doggoCursor = await doggos.find({});
 
-    return doggoCursor
+    return doggoCursor;
   }
-}
 
+  async deleteDoggos(req) {
+    bodyId = Number(req.body.dog);
+    // connect to the database and collection
+    const database = this.client.db("DoggoSwipe");
+    const collection = database.collection("Doggos");
 
-
-
+    // delete the doggo
+    const result = await collection.deleteOne({ userId: bodyId });
+  }
+};

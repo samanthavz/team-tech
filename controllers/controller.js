@@ -1,10 +1,9 @@
 //controlles.js manages all the routes in router.js
-const { DatabaseHandler } = require("../models/Model")
+const { DatabaseHandler } = require("../models/Model");
 const database = new DatabaseHandler();
-
-// let liked = [];
-// let doggoList = [];
-// let profile = [];
+let liked = [];
+let doggoList = [];
+let profile = [];
 
 exports.renderWelcomePage = (req, res) => {
   res.render("welcome", {
@@ -13,9 +12,8 @@ exports.renderWelcomePage = (req, res) => {
   });
 };
 
-exports.renderHomePage =  async (req, res) => {
-  let doggoList = [];
-  let profile = [];
+exports.renderHomePage = async (req, res) => {
+  doggoList = [];
 
   try {
     const userCursor = await database.fetchProfiles();
@@ -50,28 +48,49 @@ exports.renderHomePage =  async (req, res) => {
 };
 
 exports.renderMatchesPage = (req, res) => {
-  let liked = [];
-
   res.render("matches", {
     title: "Doggo Matches",
     liked,
   });
 };
 
-exports.deleteMatch = (req, res) => {
-  res.send("your doggo has been deleted");
+exports.deleteMatch = async (req, res) => {
+  bodyId = Number(req.body.dog);
+  try {
+    await database.deleteDoggos(req);
+
+    liked.forEach((dog) => {
+      if (dog.userId == bodyId) {
+        let index = liked.indexOf(dog);
+        if (index > -1) {
+          liked.splice(index, 1);
+        }
+      }
+    });
+  } catch (error) {
+    console.error(error);
+  } finally {
+    res.redirect("/matches");
+  }
 };
 
 exports.likedMatch = (req, res) => {
-  res.send("your doggo has been liked");
+  liked.push(doggoList[0]);
+  profile[0].likedDoggos.push(doggoList[0]);
+
+  setTimeout(redirect, 1500);
+  function redirect() {
+    res.redirect("/home");
+  }
 };
 
 exports.dislikedMatch = (req, res) => {
-  res.send("your doggo has been disliked");
+  profile[0].dislikedDoggos.push(doggoList[0]);
+  res.redirect("/home");
 };
 
 exports.renderProfilePage = (req, res) => {
   res.render("profile", {
-    title: "Profile"
+    title: "Profile",
   });
-}
+};
