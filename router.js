@@ -7,6 +7,9 @@ const controller = require("./controllers/controller")
 router.get("/", controller.renderWelcomePage);
 router.get("/home", controller.renderHomePage);
 router.get("/matches", controller.renderMatchesPage);
+router.post("/matches/deleted", controller.deleteMatch);
+router.post("/matches/liked", controller.likedMatch);
+router.post("/matches/disliked", controller.dislikedMatch);
 router.get("/profile", controller.renderProfilePage);
 
 //error handling
