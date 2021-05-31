@@ -1,0 +1,37 @@
+{
+  "name": "team-tech",
+  "version": "1.0.0",
+  "description": "A team project for a matching app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samanthavz/team-tech.git"
+  },
+  "keywords": [
+    "matching",
+    "team-project",
+    "features",
+    "express",
+    "node.js",
+    "javascript",
+    "css"
+  ],
+  "author": "Samantha van Zandwijk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samanthavz/team-tech/issues"
+  },
+  "homepage": "https://github.com/samanthavz/team-tech#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "pug": "^3.0.2"
+  }
+}
