@@ -27,7 +27,7 @@ Want to start up my app and you have no idea how? Follow the next steps! (if you
 ---
 ## 🔨 App installation:
 #### Clone this repo:
-* ```git clone https://github.com/samanthavz/project-tech.git```
+* ```git clone https://github.com/samanthavz/team-tech.git```
 
 #### Install NPM:
 * [Install NPM](https://www.npmjs.com/get-npm) in the root of the project:
@@ -46,7 +46,7 @@ The database used for this app is [MongoDB](https://www.mongodb.com/).
 ---
 # 🎫 License
 
-[MIT License](https://github.com/samanthavz/project-tech/blob/master/LICENSE)
+[MIT License](https://github.com/samanthavz/team-tech/blob/main/LICENSE)
 
 ---
 
@@ -54,7 +54,7 @@ The database used for this app is [MongoDB](https://www.mongodb.com/).
 
 - [Samantha van Zandwijk](https://github.com/samanthavz)
 - [Jabir Tisoudali](https://github.com/jabirtisou)
-- [Martijn van der Lans]()
+- [Martijn van der Lans](https://github.com/MartijnvdLans)
 - [Zain Butt](https://github.com/zainuwachtig)
 
 ![gif with waving man](./files/hello.gif)
