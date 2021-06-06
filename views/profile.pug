@@ -1,5 +1,25 @@
 extends template.pug
 
 block content
-  p your profile
+  div 
+    div 
+      img(src="", alt="profile picture")
+      h2 #{user.name} #{user.lastname}
+      p insert description 
+    //- formulier voor profile editten: user info
+    form(action="post")
+       label(for="firstName") First Name
+       input(type="text" id="firstName" name="FirstName" value=user.name)
+       label(for="lastName") Last Name
+       input(type="text" id="lastName" name="lastName" value=user.lastname)
+       label(for="age") Age
+       input(type="number" id="age" name="age" value=user.age)
+       //- div voor css
+       div 
+       //- formulier voor profile editten: dog preferences
+       label(for="dogAge") Max dog age
+       input(type="number" id="dogAge" name="dogAge" value=user.maxAge)
+       label(for="breed") preferred breeds
+       input(type="search" id="breed" name="breed" value="insert breed")
+
   script(src="scripts/matches.js", type="module")

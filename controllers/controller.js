@@ -91,6 +91,6 @@ exports.dislikedMatch = (req, res) => {
 
 exports.renderProfilePage = (req, res) => {
   res.render("profile", {
-    title: "Profile",
+    title: "Profile", user: profile[0]
   });
 };
