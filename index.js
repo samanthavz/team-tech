@@ -1,12 +1,11 @@
 const express = require("express");
-const dotenv = require("dotenv");
 const app = express();
 const port = 3000;
-
-// see https://www.npmjs.com/package/dotenv
-dotenv.config();
+const router = require("./router")
 
 // templating
+app.set("views", "views")
+app.set("view engine", "pug");
 app.use(express.static(__dirname + "/static/public/"));
 
 // For parsing nested JSON objects
@@ -14,17 +13,8 @@ app.use(express.static(__dirname + "/static/public/"));
 app.use(express.urlencoded({ extended: true })); //Parse URL-encoded bodies
 app.use(express.json());
 
-app.set("view engine", "pug");
-
-app.get("/", function (req, res) {
-  res.render("welcome", {
-  });
-});
-
-//error handling
-app.use((req, res, next) => {
-  res.status(404).send("sorry can't find that!");
-});
+// MVC model: https://www.youtube.com/watch?v=dDjzTDN3cy8
+app.use("/", router)
 
 //connect
 app.listen(process.env.PORT || port, () => {

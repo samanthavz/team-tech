@@ -1,4 +1,4 @@
-# Insert app name
+# DoggoSwipe
 # description
 <!-- TODO: add a description here -->
 
