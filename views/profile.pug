@@ -3,9 +3,9 @@ extends template.pug
 block content
   div 
     div 
-      img(src="", alt="profile picture")
+      img(src=user.img, alt="profile picture")
       h2 #{user.name} #{user.lastname}
-      p insert description 
+      p #{user.status} 
     //- formulier voor profile editten: user info
     form(action="post")
        label(for="firstName") First Name
