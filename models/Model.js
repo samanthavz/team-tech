@@ -1,6 +1,6 @@
 // Model.js is used for database communication
-const { MongoClient } = require("mongodb");
-const dotenv = require("dotenv");
+const { MongoClient } = require('mongodb');
+const dotenv = require('dotenv');
 
 dotenv.config();
 
@@ -18,8 +18,8 @@ exports.DatabaseHandler = class {
 
   // filterquery for Jabir to make it easier to find the current profile
   async fetchProfiles(filterquery) {
-    const database = this.client.db("DoggoSwipe");
-    const users = database.collection("Users");
+    const database = this.client.db('DoggoSwipe');
+    const users = database.collection('Users');
 
     // fetch the data user
     const userCursor = await users.find(filterquery);
@@ -29,8 +29,8 @@ exports.DatabaseHandler = class {
 
   async fetchDoggos() {
     // connect to the database and collection for doggo and user
-    const database = this.client.db("DoggoSwipe");
-    const doggos = database.collection("Doggos");
+    const database = this.client.db('DoggoSwipe');
+    const doggos = database.collection('Doggos');
 
     // fetch the data doggos
     const doggoCursor = await doggos.find({});
@@ -41,8 +41,8 @@ exports.DatabaseHandler = class {
   async deleteDoggos(req) {
     bodyId = Number(req.body.dog);
     // connect to the database and collection
-    const database = this.client.db("DoggoSwipe");
-    const collection = database.collection("Doggos");
+    const database = this.client.db('DoggoSwipe');
+    const collection = database.collection('Doggos');
 
     // delete the doggo
     const result = await collection.deleteOne({ userId: bodyId });
