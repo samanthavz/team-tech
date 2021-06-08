@@ -39,12 +39,12 @@ exports.DatabaseHandler = class {
   }
 
   async deleteDoggos(req) {
-    bodyId = Number(req.body.dog);
+    let bodyId = Number(req.body.dog);
     // connect to the database and collection
     const database = this.client.db('DoggoSwipe');
     const collection = database.collection('Doggos');
 
     // delete the doggo
-    const result = await collection.deleteOne({ userId: bodyId });
+    await collection.deleteOne({ userId: bodyId });
   }
 };
