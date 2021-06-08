@@ -18,11 +18,11 @@ DoggoSwipe is a tinder-like app for dogs. You can easily register or log in and 
 
 ### topics
 
-- MVC
-- API
-- Chatting with socket.io
-- User authentication with passport.js
-- Mongoose
+- MVC ([Samantha van Zandwijk](https://github.com/samanthavz))
+- API ([Samantha van Zandwijk](https://github.com/samanthavz))
+- Chatting with socket.io ([Martijn van der Lans](https://github.com/MartijnvdLans))
+- User authentication with passport.js ([Jabir Tisoudali](https://github.com/jabirtisou))
+- Mongoose ([Zain Butt](https://github.com/zainuwachtig))
 
  ## 🤖 Used technologies
 
