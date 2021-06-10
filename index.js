@@ -1,22 +1,10 @@
 const express = require("express");
-const mongoose = require("mongoose");
 const passport = require("passport");
 const flash = require("connect-flash");
 
 const app = express();
 const port = 3000;
-require("./config/passport")(passport);
-
-mongoose
-  .connect(
-    "mongodb+srv://Jabir:Teampugsjabir1@doggoapp.e9zp8.mongodb.net/DoggoApp?retryWrites=true&w=majority",
-    {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    }
-  )
-  .then(() => console.log("MongoDB Connected..."))
-  .catch((err) => console.log(err));
+require("./controllers/passport")(passport);
 
 // templating
 app.set("views", "views");
@@ -25,7 +13,7 @@ app.use(express.static(__dirname + "/static/public/"));
 
 app.use(
   require("express-session")({
-    secret: "Any normal Word", //decode or encode session
+    secret: "secret", //decode or encode session
     resave: false,
     saveUninitialized: false,
   })
@@ -53,14 +41,6 @@ app.use(function (req, res, next) {
 // MVC model: https://www.youtube.com/watch?v=dDjzTDN3cy8
 const router = require("./router");
 app.use("/", router);
-
-//In app.js
-function isLoggedIn(req, res, next) {
-  if (req.isAuthenticated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
 
 //connect
 app.listen(process.env.PORT || port, () => {
