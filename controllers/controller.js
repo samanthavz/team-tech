@@ -29,9 +29,9 @@ exports.renderRegister = (req, res) => {
   res.render("register");
 };
 exports.postRegister = async (req, res) => {
-  const { email, password, name, lastName, age } = req.body;
+  const { email, password, name, lastName, age, maxAge } = req.body;
   console.log(req.body);
-  if (!email || !password || !name || !lastName || !age) {
+  if (!email || !password || !name || !lastName || !age || !maxAge) {
     console.log("Please enter all fields");
   }
 
@@ -47,6 +47,7 @@ exports.postRegister = async (req, res) => {
           name,
           lastName,
           age,
+          maxAge,
         });
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -76,7 +77,7 @@ exports.postLogin = (req, res, next) => {
 
 exports.renderHomePage = async (req, res) => {
   doggoList = [];
-
+  console.log("Logged in user:", req.session.user);
   try {
     const userCursor = await database.fetchProfiles();
     const doggoCursor = await database.fetchDoggos();
@@ -84,8 +85,9 @@ exports.renderHomePage = async (req, res) => {
     await userCursor.forEach((user) => {
       profile.push(user);
     });
+    console.log("Test");
 
-    // wait for data
+    // wait for da
     await doggoCursor.forEach((doc) => {
       let push = false;
       profile[0].likedDoggos.forEach(function (dog) {
@@ -154,5 +156,9 @@ exports.dislikedMatch = (req, res) => {
 exports.renderProfilePage = (req, res) => {
   res.render("profile", {
     title: "Profile",
+<<<<<<< Updated upstream
+=======
+    user: profile[0],
+>>>>>>> Stashed changes
   });
 };

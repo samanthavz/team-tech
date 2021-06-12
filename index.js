@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const flash = require("connect-flash");
-
+const session = require("express-session");
 const app = express();
 const port = 3000;
 require("./controllers/passport")(passport);

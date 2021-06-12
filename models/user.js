@@ -22,6 +22,16 @@ const UserSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    dislikedDoggos: {
+      type: Array,
+    },
+    likedDoggos: {
+      type: Array,
+    },
+    maxAge: {
+      type: Number,
+      required: true,
+    },
     status: {
       type: String,
       required: false,
@@ -33,5 +43,5 @@ const UserSchema = new mongoose.Schema(
   },
   { collection: "Users" }
 );
-const User = mongoose.model("User", UserSchema);
+const User = mongoose.model("user", UserSchema);
 module.exports = User;
