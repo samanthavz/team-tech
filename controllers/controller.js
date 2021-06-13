@@ -13,7 +13,7 @@ let profile = [];
 exports.renderWelcomePage = (req, res) => {
   res.render("welcome", {
     title: "Doggo app",
-    message: "This is my matching app",
+    h3: "This is my matching app",
   });
   app.post(
     "/login",
@@ -55,7 +55,7 @@ exports.postRegister = async (req, res) => {
             newUser.password = hash;
             newUser
               .save()
-              .then((usr) => {
+              .then((user) => {
                 console.log("Registration successful!");
                 res.redirect("/home");
               })
@@ -77,7 +77,6 @@ exports.postLogin = (req, res, next) => {
 
 exports.renderHomePage = async (req, res) => {
   doggoList = [];
-  console.log("Logged in user:", req.session.user);
   try {
     const userCursor = await database.fetchProfiles();
     const doggoCursor = await database.fetchDoggos();
@@ -85,22 +84,22 @@ exports.renderHomePage = async (req, res) => {
     await userCursor.forEach((user) => {
       profile.push(user);
     });
-    console.log("Test");
 
     // wait for da
     await doggoCursor.forEach((doc) => {
+      const user = req.user;
       let push = false;
-      profile[0].likedDoggos.forEach(function (dog) {
+      user.likedDoggos.forEach(function (dog) {
         if (doc.userId === dog.userId) {
           push = true;
         }
       });
-      profile[0].dislikedDoggos.forEach(function (dog) {
+      user.dislikedDoggos.forEach(function (dog) {
         if (doc.userId === dog.userId) {
           push = true;
         }
       });
-      if (!push && doc.age <= profile[0].maxAge) {
+      if (!push && doc.age <= user.maxAge) {
         doggoList.push(doc);
       }
     });
@@ -138,27 +137,38 @@ exports.deleteMatch = async (req, res) => {
   }
 };
 
-exports.likedMatch = (req, res) => {
-  liked.push(doggoList[0]);
-  profile[0].likedDoggos.push(doggoList[0]);
-
+exports.likedMatch = async (req, res) => {
+  try {
+    liked.push(doggoList[0]);
+    const user = req.user;
+    const currentUser = await User.findById(user._id);
+    currentUser.likedDoggos.push(doggoList[0]);
+    await currentUser.save();
+  } catch (error) {
+    console.log(error);
+  }
   setTimeout(redirect, 1500);
   function redirect() {
     res.redirect("/home");
   }
 };
 
-exports.dislikedMatch = (req, res) => {
-  profile[0].dislikedDoggos.push(doggoList[0]);
-  res.redirect("/home");
+exports.dislikedMatch = async (req, res) => {
+  try {
+    const user = req.user;
+    const currentUser = await User.findById(user._id);
+    currentUser.dislikedDoggos.push(doggoList[0]);
+    await currentUser.save();
+    res.redirect("/home");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 exports.renderProfilePage = (req, res) => {
+  const user = req.user;
   res.render("profile", {
     title: "Profile",
-<<<<<<< Updated upstream
-=======
-    user: profile[0],
->>>>>>> Stashed changes
+    user: user,
   });
 };

@@ -2,17 +2,18 @@
 const express = require("express");
 const router = express.Router();
 const controller = require("./controllers/controller");
+const { lAuth, oAuth } = require("./controllers/auth");
 
-router.get("/", controller.renderWelcomePage);
-router.get("/home", controller.renderHomePage);
-router.get("/matches", controller.renderMatchesPage);
-router.get("/register", controller.renderRegister);
+router.get("/", oAuth, controller.renderWelcomePage);
+router.get("/home", lAuth, controller.renderHomePage);
+router.get("/matches", lAuth, controller.renderMatchesPage);
+router.get("/register", oAuth, controller.renderRegister);
 router.post("/register", controller.postRegister);
 router.post("/login", controller.postLogin);
-router.post("/matches/deleted", controller.deleteMatch);
-router.post("/matches/liked", controller.likedMatch);
-router.post("/matches/disliked", controller.dislikedMatch);
-router.get("/profile", controller.renderProfilePage);
+router.post("/matches/deleted", lAuth, controller.deleteMatch);
+router.post("/matches/liked", lAuth, controller.likedMatch);
+router.post("/matches/disliked", lAuth, controller.dislikedMatch);
+router.get("/profile", lAuth, controller.renderProfilePage);
 
 //error handling
 router.use((req, res, next) => {

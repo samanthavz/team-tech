@@ -12,10 +12,16 @@ app.set("view engine", "pug");
 app.use(express.static(__dirname + "/static/public/"));
 
 app.use(
-  require("express-session")({
-    secret: "secret", //decode or encode session
+  session({
+    secret: "my secret",
     resave: false,
     saveUninitialized: false,
+  })
+);
+app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: false,
   })
 );
 
