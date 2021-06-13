@@ -10,7 +10,7 @@ block content
     form(action="/profile/edit", method="post",)
        h3 Edit Info
        label(for="firstName") First Name
-       input(type="text" id="firstName" name="FirstName" value=user.name)
+       input(type="text" id="firstName" name="firstName" value=user.name)
        label(for="lastName") Last Name
        input(type="text" id="lastName" name="lastName" value=user.lastName)
        label(for="age") Age
@@ -22,6 +22,7 @@ block content
        input(type="number" id="dogAge" name="dogAge" value=user.maxAge)
        label(for="breed") preferred breeds
        input(type="search" id="breed" name="breed" value="insert breed")
+       input(type="hidden", name="userId", value=user._id)
        button(type="submit", class="profile-button") Submit edit
 
   script(src="scripts/matches.js", type="module")

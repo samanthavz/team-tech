@@ -11,6 +11,7 @@ router.post("/matches/deleted", controller.deleteMatch);
 router.post("/matches/liked", controller.likedMatch);
 router.post("/matches/disliked", controller.dislikedMatch);
 router.get("/profile", controller.renderProfilePage);
+router.post("/profile/edit", controller.editProfilePage);
 
 //error handling
 router.use((req, res, next) => {

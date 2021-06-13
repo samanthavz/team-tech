@@ -1,6 +1,8 @@
 // Model.js is used for database communication
 const { MongoClient } = require("mongodb");
 const dotenv = require("dotenv");
+const { ObjectId } = require("mongodb");
+
 
 dotenv.config();
 
@@ -46,5 +48,32 @@ exports.DatabaseHandler = class {
 
     // delete the doggo
     await collection.deleteOne({ userId: bodyId });
+  }
+
+  async editProfile(req) {
+    let Id = req.body.userId;
+    let firstName = req.body.firstName;
+    // let lastName = req.body.lastName
+    // let age = Number(req.body.age)
+    // let dogAge = Number(req.body.dogAge)
+    // let breed = req.body.breed;
+
+    let data = req.body
+    console.log(req.body)
+
+    for(const item in data) {
+      console.log(`${item}: ${data[item]}`);
+    }
+
+    const database = this.client.db("DoggoSwipe");
+    const collection = database.collection("Users");
+
+    // https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
+    var o_id = new ObjectId(Id);
+
+    await collection.findOneAndUpdate(
+      { _id: o_id },
+      { $set: { name: firstName } }
+    );
   }
 };

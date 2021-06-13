@@ -94,3 +94,14 @@ exports.renderProfilePage = (req, res) => {
     title: "Profile", user: profile[0]
   });
 };
+
+exports.editProfilePage = async (req, res) => {
+  // console.log(req.body.userId)
+  try {
+    await database.editProfile(req);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    res.redirect("/profile");
+  }
+};
