@@ -57,9 +57,7 @@ exports.DatabaseHandler = class {
     let Id = req.body.userId;
     // https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
     let o_id = new ObjectId(Id);
-
     let data = req.body;
-    console.log(req.body);
 
     for (const item in data) {
       let update = `${data[item]}`;
@@ -68,12 +66,6 @@ exports.DatabaseHandler = class {
         { _id: o_id },
         { $set: { [item]: update } }
       );
-      // console.log(`${item}: ${data[item]}`);
     }
-
-    // await collection.findOneAndUpdate(
-    //   { _id: o_id },
-    //   { $set: { name: firstName } }
-    // );
   }
 };
