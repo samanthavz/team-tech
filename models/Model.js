@@ -51,29 +51,29 @@ exports.DatabaseHandler = class {
   }
 
   async editProfile(req) {
-    let Id = req.body.userId;
-    let firstName = req.body.firstName;
-    // let lastName = req.body.lastName
-    // let age = Number(req.body.age)
-    // let dogAge = Number(req.body.dogAge)
-    // let breed = req.body.breed;
-
-    let data = req.body
-    console.log(req.body)
-
-    for(const item in data) {
-      console.log(`${item}: ${data[item]}`);
-    }
-
     const database = this.client.db("DoggoSwipe");
     const collection = database.collection("Users");
 
+    let Id = req.body.userId;
     // https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
-    var o_id = new ObjectId(Id);
+    let o_id = new ObjectId(Id);
 
-    await collection.findOneAndUpdate(
-      { _id: o_id },
-      { $set: { name: firstName } }
-    );
+    let data = req.body;
+    console.log(req.body);
+
+    for (const item in data) {
+      let update = `${data[item]}`;
+      console.log(item);
+      await collection.findOneAndUpdate(
+        { _id: o_id },
+        { $set: { [item]: update } }
+      );
+      // console.log(`${item}: ${data[item]}`);
+    }
+
+    // await collection.findOneAndUpdate(
+    //   { _id: o_id },
+    //   { $set: { name: firstName } }
+    // );
   }
 };
