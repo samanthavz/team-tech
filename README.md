@@ -2,7 +2,7 @@
 
 # 🐶 Team Pugs
 
-Welcome to our team-project! We are team pugs and we've build this app called DoggoSwipe. Each of us has individually built a feature. DoggoSwipe consists out of all the features and topics we've been working within these few weeks. You can read more documentation in our [wiki](https://github.com/samanthavz/project-tech/wiki) (written in dutch).
+Welcome to our team-project! We are team pugs and we've build this app called DoggoSwipe. Each of us has individually built a feature. DoggoSwipe consists out of all the features and topics we've been working on within these few weeks. You can read more documentation in our [wiki](https://github.com/samanthavz/team-tech/wiki) (written in dutch).
 
 # 📄 description and concept
 
@@ -15,6 +15,7 @@ DoggoSwipe is a tinder-like app for dogs. You can easily register or log in and 
 - Filtering
 - Deleting
 - Chatting
+- Profile editting
 
 ### topics
 
@@ -38,7 +39,7 @@ We have used different technologies to build our app. It is made with CSS and Ja
 
 # 💻 How to install
 
-Want to start up my app and you have no idea how? Follow the next steps! (if you are a pro already, you can skip the pre-installation).
+Want to start up our app and you have no idea how? Follow the next steps! (if you are a pro already, you can skip the pre-installation).
 ## 🔨 Pre-installation:
 #### NODE.js
 * [Install NodeJs](https://nodejs.org/en/download/)
