@@ -29,7 +29,8 @@ exports.renderRegister = (req, res) => {
   res.render("register");
 };
 exports.postRegister = async (req, res) => {
-  const { email, password, name, lastName, age, maxAge } = req.body;
+  const { email, password, name, lastName, age, maxAge, img, status } =
+    req.body;
   console.log(req.body);
   if (!email || !password || !name || !lastName || !age || !maxAge) {
     console.log("Please enter all fields");
@@ -48,6 +49,8 @@ exports.postRegister = async (req, res) => {
           lastName,
           age,
           maxAge,
+          img,
+          status,
         });
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {

@@ -11,7 +11,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("MongoDB Connected..."))
+  .then(() => console.log("🥭 mAngoDB Connected..."))
   .catch((err) => console.log(err));
 
 exports.DatabaseHandler = class {
