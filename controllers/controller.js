@@ -29,7 +29,7 @@ exports.renderRegister = (req, res) => {
   res.render("register");
 };
 exports.postRegister = async (req, res) => {
-  const { email, password, name, lastName, age, maxAge, img, status } =
+  const { email, password, name, lastName, age, maxAge, img, status, breed } =
     req.body;
   console.log(req.body);
   if (!email || !password || !name || !lastName || !age || !maxAge) {
@@ -51,6 +51,7 @@ exports.postRegister = async (req, res) => {
           maxAge,
           img,
           status,
+          breed,
         });
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {

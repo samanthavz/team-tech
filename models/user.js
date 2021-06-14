@@ -40,6 +40,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    breed: {
+      trype: String,
+      required: false,
+    },
   },
   { collection: "Users" }
 );
