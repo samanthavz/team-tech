@@ -7,8 +7,12 @@ html
     img(src='/images/bone.png' class="boneImg" alt="DoggoSwipe logo" height="100px" )
     h1 DoggoSwipe
     p Swipe your way to your doggo
-      div
-        a(href="/home") Start
+    form(action="/login" method="POST")
+      input(type="email" id="email" name="email" placeholder="Email-adress")
+      input(type="password" id="password" name="password" placeholder="Password..")
+      
+      button(class="Login") Login
+    a(class="registerBtn" href="/register") Sign Up
     img(src='/images/dog.png' class="doggoPic" alt="Pixelated dog" height="300px" width="300px")
     
     script

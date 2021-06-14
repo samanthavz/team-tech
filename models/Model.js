@@ -2,9 +2,17 @@
 const { MongoClient } = require("mongodb");
 const dotenv = require("dotenv");
 const { ObjectId } = require("mongodb");
-
+const mongoose = require("mongoose");
 
 dotenv.config();
+
+mongoose
+  .connect(process.env.DB_CONNECT, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("MongoDB Connected..."))
+  .catch((err) => console.log(err));
 
 exports.DatabaseHandler = class {
   constructor() {
