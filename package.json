@@ -44,6 +44,8 @@
     "express-session": "^1.17.2",
     "mongodb": "^3.6.9",
     "mongoose": "^5.12.13",
+    "multiple-select": "^1.5.2",
+    "node-fetch": "^2.6.1",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.1.0",
