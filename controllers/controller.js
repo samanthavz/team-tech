@@ -8,7 +8,6 @@ const { DatabaseHandler } = require("../models/Model");
 const database = new DatabaseHandler();
 let liked = [];
 let doggoList = [];
-let profile = [];
 
 exports.renderWelcomePage = (req, res) => {
   res.render("welcome", {
@@ -48,6 +47,7 @@ exports.postRegister = async (req, res) => {
           lastName,
           age,
           maxAge,
+          breed,
         });
         bcrypt.genSalt(10, (err, salt) => {
           bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -76,38 +76,30 @@ exports.postLogin = (req, res, next) => {
 };
 
 exports.renderHomePage = async (req, res) => {
-  doggoList = [];
   try {
-    const userCursor = await database.fetchProfiles();
-    const doggoCursor = await database.fetchDoggos();
+    const user = req.user
 
-    await userCursor.forEach((user) => {
-      profile.push(user);
-    });
+    let queryBreed = {};
+    if (user.breed && Array.isArray(user.breed)) {
+      queryBreed = { breed: user.breed}
+    } else if (user.breed && !Array.isArray(user.breed)) {
+      queryBreed = { breed: [user.breed]}
+    }
 
-    // wait for da
-    await doggoCursor.forEach((doc) => {
-      const user = req.user;
-      let push = false;
-      user.likedDoggos.forEach(function (dog) {
-        if (doc.userId === dog.userId) {
-          push = true;
-        }
-      });
-      user.dislikedDoggos.forEach(function (dog) {
-        if (doc.userId === dog.userId) {
-          push = true;
-        }
-      });
-      if (!push && doc.age <= user.maxAge) {
-        doggoList.push(doc);
-      }
-    });
+    let queryAge = {};
+    if (user.maxAge) {
+      queryAge = { age: { $lt: user.maxAge}}
+    }
+  
+    let queryLikedOrDisliked = {$and: [{userId: {$nin:user.likedDoggos}}, {userId: {$nin:user.dislikedDoggos}}]}
+
+    const filterQuery = {...queryBreed, ...queryAge, ...queryLikedOrDisliked};
+    const doggoList = await database.fetchDoggos(filterQuery);
+  
+    res.render("home", { title: "DoggoSwipe", doggo: doggoList[0] });
   } catch (error) {
     console.error(error);
-  } finally {
-    res.render("home", { title: "DoggoSwipe", doggo: doggoList[0] });
-  }
+  } 
 };
 
 exports.renderMatchesPage = (req, res) => {
@@ -139,9 +131,27 @@ exports.deleteMatch = async (req, res) => {
 
 exports.likedMatch = async (req, res) => {
   try {
-    liked.push(doggoList[0]);
     const user = req.user;
     const currentUser = await User.findById(user._id);
+    let queryBreed = {};
+    if (user.breed && Array.isArray(user.breed)) {
+      queryBreed = { breed: user.breed}
+    } else if (user.breed && !Array.isArray(user.breed)) {
+      queryBreed = { breed: [user.breed]}
+    }
+
+    let queryAge = {};
+    if (user.maxAge) {
+      queryAge = { age: { $lt: user.maxAge}}
+    }
+  
+    let queryLikedOrDisliked = {$and: [{userId: {$nin:user.likedDoggos}}, {userId: {$nin:user.dislikedDoggos}}]}
+    console.log(queryLikedOrDisliked)
+    const filterQuery = {...queryBreed, ...queryAge, ...queryLikedOrDisliked};
+    const doggoList = await database.fetchDoggos(filterQuery);
+  
+    
+    liked.push(doggoList[0]);
     currentUser.likedDoggos.push(doggoList[0]);
     await currentUser.save();
   } catch (error) {

@@ -37,15 +37,15 @@ exports.DatabaseHandler = class {
     return userCursor;
   }
 
-  async fetchDoggos() {
+  async fetchDoggos(filterQuery) {
     // connect to the database and collection for doggo and user
     const database = this.client.db("DoggoSwipe");
     const doggos = database.collection("Doggos");
 
     // fetch the data doggos
-    const doggoCursor = await doggos.find({});
-
-    return doggoCursor;
+    // const doggoCursor = await doggos.find({});
+    const doggoList = await doggos.find(filterQuery).toArray();
+    return doggoList;
   }
 
   async deleteDoggos(req) {
@@ -77,3 +77,5 @@ exports.DatabaseHandler = class {
     }
   }
 };
+
+
