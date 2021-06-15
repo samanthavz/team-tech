@@ -94,3 +94,10 @@ exports.renderProfilePage = (req, res) => {
     title: "Profile",
   });
 };
+
+exports.renderChatPage = async (req, res) => {
+  const chats = await (await database.fetchChats()).toArray();
+  res.render("chat", {
+    title: "Asielchat", chats
+  });
+};

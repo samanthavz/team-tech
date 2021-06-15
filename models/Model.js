@@ -47,4 +47,15 @@ exports.DatabaseHandler = class {
     // delete the doggo
     await collection.deleteOne({ userId: bodyId });
   }
+
+  async fetchChats() {
+    // connect to the database and collection for chat and user
+    const database = this.client.db("DoggoSwipe");
+    const chats = database.collection("msgs");
+  
+    // fetch the data chats
+    const chatMessages = await chats.find({});
+  
+    return chatMessages;
+  }
 };

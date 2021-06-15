@@ -1,0 +1,14 @@
+extends template.pug
+
+block content
+  //- chatbar 
+  div(id="messages")
+    -chats 
+    each message in chats
+      li= (message.time, message.msg)
+  form(id="send-container")
+    input(type="text" id="msg" autocomplete="off" class="doggoMessage" placeholder="Type een bericht ...")
+    button(type="submit" id="send-button") Verstuur
+      //- text
+  script(src="/socket.io/socket.io.js", type="module")
+  script(src="scripts/chat.js", type="module")

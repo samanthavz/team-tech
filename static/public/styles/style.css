@@ -420,6 +420,60 @@ li div {
 }
 
 /* ------------------------------------- */
+/*            Chatberichten              */
+/* ------------------------------------- */
+
+#send-container {
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  background-color: #fff;
+  padding: .5em;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+#msg {
+  height: 3.5em;
+  width: 100%;
+  margin-right: 1em;
+  padding: 1em;
+}
+
+#messages {
+  display: flex;
+  flex-direction: column;
+  color: #000;
+  height: 80vh;
+  overflow: auto;
+}
+
+#messages li {
+  list-style-type: none;
+  background: #fff;
+  padding: 1em;
+  max-width: 80%;
+  margin: .5em;
+  border-radius: .5em;
+  align-self: flex-end;
+}
+
+#messages li:nth-child(4) {
+  background:rgb(255, 126, 126);
+  color: #fff;
+  align-self: flex-start;
+}
+
+#send-container button {
+  background-color: rgb(255, 126, 126);
+  border: none;
+  color: #fff;
+  padding: 0 1em;
+}
+
+/* ------------------------------------- */
 /*           media queries               */
 /* ------------------------------------- */
 
