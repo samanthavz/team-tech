@@ -1,25 +1,31 @@
 extends template.pug
 
 block content
-  div 
+  div.profile
     div 
-      img(src="", alt="profile picture")
-      h2 #{user.name} #{user.lastname}
-      p insert description 
+      img(src="./images/profilepic.jpg", alt="profile picture")
+      h2 #{user.name} #{user.lastName}
+      p #{user.status} 
     //- formulier voor profile editten: user info
-    form(action="post")
+    form(action="/profile/edit", method="post",)
+       h3 Edit Info
        label(for="firstName") First Name
-       input(type="text" id="firstName" name="FirstName" value=user.name)
+       input(type="text" id="firstName" name="name" value=user.name)
        label(for="lastName") Last Name
-       input(type="text" id="lastName" name="lastName" value=user.lastname)
+       input(type="text" id="lastName" name="lastName" value=user.lastName)
        label(for="age") Age
        input(type="number" id="age" name="age" value=user.age)
-       //- div voor css
-       div 
+       //- div voor css divider
+       div.divider
        //- formulier voor profile editten: dog preferences
        label(for="dogAge") Max dog age
-       input(type="number" id="dogAge" name="dogAge" value=user.maxAge)
+       input(type="number" id="dogAge" name="maxAge" value=user.maxAge)
        label(for="breed") preferred breeds
-       input(type="search" id="breed" name="breed" value="insert breed")
+       select(name="breed", id="breed", multiple="multiple", size="5")
+         each breed in breeds
+           +ras(breed)
+       input(type="hidden", name="userId", value=user._id)
+       button(type="submit", class="profile-button") Submit edit
 
-  script(src="scripts/matches.js", type="module")
+  script(src="scripts/profile.js", type="module")
+  

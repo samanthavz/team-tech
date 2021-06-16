@@ -3,14 +3,14 @@ extends template.pug
 block content
   button(class="infoButton" id="infoButton") 
     img(src="images/info-01.png" alt="infobutton")
-  div(class="home")
+  div.home
     if doggo
       div(class="cardDiv", draggable="true")
         div(class="imgDiv") 
           img(src=doggo.imgSrc, class="image", id="dogImg", alt="dog photo", height="300px")
           p #{doggo.price}
           img(src=doggo.gender, class="gender", alt="gender")
-        div(class="info") 
+        div.info
           div
             h2 #{doggo.name}
             p #{doggo.breed}

@@ -1,0 +1,16 @@
+doctype html
+html
+  include includes/head.pug
+  body(class="registerPage")
+    h1 DoggoSwipe
+    form(action="/register" method="POST")
+      input(type="email" id="email" name="email" placeholder="Email-adres")
+      input(type="password" id="password" name="password" placeholder="Password")
+      input(type="name" id="name" name="name" style="text-transform: capitalize" placeholder="Name")
+      input(type="lastName" id="lastName" style="text-transform: capitalize" name="lastName" placeholder="Last Name")
+      input(type="age" id="age" name="age" placeholder="Age")
+      input(type="hidden" id="maxAge" name="maxAge" value ="10")
+      input(type="hidden" id="img" name="img" value ="./images/profilepic.jpg")
+      input(type="hidden" id="status" name="status" value ="I'm looking for a cute dog")
+      button(class="registerBtn2") Sign Up
+    img(src='/images/dog.png' class="doggoPic" alt="Pixelated dog" height="300px" width="300px")
