@@ -1,8 +1,18 @@
 // Model.js is used for database communication
 const { MongoClient } = require("mongodb");
 const dotenv = require("dotenv");
+const { ObjectId } = require("mongodb");
+const mongoose = require("mongoose");
 
 dotenv.config();
+
+mongoose
+  .connect(process.env.DB_CONNECT, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("🥭 mAngoDB Connected..."))
+  .catch((err) => console.log(err));
 
 exports.DatabaseHandler = class {
   constructor() {
@@ -59,4 +69,30 @@ exports.DatabaseHandler = class {
     return chatMessages;
   }
   
+};
+  async editProfile(req) {
+    const database = this.client.db("DoggoSwipe");
+    const collection = database.collection("Users");
+
+    let Id = req.body.userId;
+    // https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
+    let o_id = new ObjectId(Id);
+    let data = req.body;
+
+    for (const item in data) {
+      let update = `${data[item]}`;
+      // console.log(item);
+      if (item === "breed") {
+        collection.findOneAndUpdate(
+          { _id: o_id },
+          { $push: { [item]: update } }
+        );
+      } else {
+        await collection.findOneAndUpdate(
+          { _id: o_id },
+          { $set: { [item]: update } }
+        );
+      }
+    }
+  }
 };
