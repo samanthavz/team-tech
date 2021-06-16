@@ -20,10 +20,13 @@ app.use(express.static(__dirname + "/static/public/"));
 // run when client connects
 io.on('connection', socket => {
   Msg.find()
-  socket.on('chatMessage', (msg) => {
-    const newMessage = new Msg({msg})
+  socket.on('chatMessage', (msg, timeNow, user) => {
+    user = "GEBRUIKER"
+    time = new Date();
+    timeNow = time.getHours() + `:` + (time.getMinutes()<10?'0':'') + time.getMinutes();
+    const newMessage = new Msg({msg, timeNow, user})
     newMessage.save().then(() => {
-      io.emit('message', msg)
+      io.emit('message', {msg, timeNow, user})
     })
   })
 })

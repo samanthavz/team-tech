@@ -1,14 +1,26 @@
-extends template.pug
-
-block content
-  //- chatbar 
-  div(id="messages")
-    -chats 
-    each message in chats
-      li= (message.time, message.msg)
-  form(id="send-container")
-    input(type="text" id="msg" autocomplete="off" class="doggoMessage" placeholder="Type een bericht ...")
-    button(type="submit" id="send-button") Verstuur
-      //- text
-  script(src="/socket.io/socket.io.js", type="module")
-  script(src="scripts/chat.js", type="module")
+doctype html
+html
+  include includes/head.pug
+  body(class="template")
+    +info
+    h1 #{title}
+    block content
+      //- chatbar 
+      div(id="messages")
+        -chats 
+          each message in chats
+            - let userName = { user: message.user }
+            if userName.user != "GEBRUIKER"
+              li.message_left
+               p=(message.user + ' - ' + message.timeNow)
+                p=(message.msg)
+            else 
+              li
+                p=(message.user + ' - ' + message.timeNow)
+                p=(message.msg)
+      form(id="send-container")
+        input(type="text" id="msg" autocomplete="off" class="doggoMessage" placeholder="Type een bericht ...")
+        button(type="submit" id="send-button") Verstuur
+          //- text
+      script(src="/socket.io/socket.io.js", type="module")
+      script(src="scripts/chat.js", type="module")

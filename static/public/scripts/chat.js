@@ -4,7 +4,7 @@ const chatMessages = document.getElementById('messages')
 const socket = io();
 
 socket.on('message', message => {
-    console.log(message)
+    console.log(message);
     outputMessage(message);
 
     // Scroll Down
@@ -24,12 +24,10 @@ form.addEventListener('submit', (e) => {
 })
 
 function outputMessage(message) {
-    // var time = new Date();
-    // var timeNow = time.getHours() + `:` + (time.getMinutes()<10?'0':'') + time.getMinutes();
     const li = document.createElement('li');
-    li.innerHTML = `
+    li.innerHTML = `<p> ${message.user} - ${message.timeNow} </p>
     <p class="text">
-        ${message}
+        ${message.msg}
     </p>`
     chatMessages.appendChild(li);
 }

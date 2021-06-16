@@ -1,6 +1,6 @@
 // Model.js is used for database communication
 const { MongoClient } = require("mongodb");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv");const mongoose = require('mongoose');
 
 dotenv.config();
 
