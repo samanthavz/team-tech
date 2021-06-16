@@ -9,8 +9,7 @@ html
       div(id="messages")
         -chats 
           each message in chats
-            - let userName = { user: message.user }
-            if userName.user != "GEBRUIKER"
+            if message.user != "GEBRUIKER"
               li.message_left
                p=(message.user + ' - ' + message.timeNow)
                 p=(message.msg)

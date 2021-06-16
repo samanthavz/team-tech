@@ -17,7 +17,7 @@ app.set("views", "views")
 app.set("view engine", "pug");
 app.use(express.static(__dirname + "/static/public/"));
 
-// run when client connects
+// run when client connects || Werkt niet in MVC omdat socket direct bij de server.listen PORT moet zijn
 io.on('connection', socket => {
   Msg.find()
   socket.on('chatMessage', (msg, timeNow, user) => {
