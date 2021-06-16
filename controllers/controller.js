@@ -216,10 +216,12 @@ exports.renderProfilePage = (req, res) => {
 
 exports.renderChatPage = async (req, res) => {
   const chats = await (await database.fetchChats()).toArray();
+  const user = req.user;
   res.render("chat", {
-    title: "Asielchat", chats
+    title: "Asielchat", chats, user: user
   });
 };
+
 exports.editProfilePage = async (req, res) => {
   // console.log(req.body.userId)
   try {

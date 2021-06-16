@@ -3,20 +3,23 @@ html
   include includes/head.pug
   body(class="template")
     +info
+
     h1 #{title}
+    a(href="/matches")
+                img(src="images/arrow.svg" alt="back icon")
     block content
       //- chatbar 
       div(id="messages")
-        -chats 
-          each message in chats
-            if message.user != "GEBRUIKER"
-              li.message_left
-               p=(message.user + ' - ' + message.timeNow)
-                p=(message.msg)
-            else 
-              li
-                p=(message.user + ' - ' + message.timeNow)
-                p=(message.msg)
+        -chats
+            each message in chats
+              if message.user != message.user
+                li.message_left
+                  p=(message.timeNow)
+                  p=(message.msg)
+              else 
+                li
+                  p=(message.timeNow)
+                  p=(message.msg)
       form(id="send-container")
         input(type="text" id="msg" autocomplete="off" class="doggoMessage" placeholder="Type een bericht ...")
         button(type="submit" id="send-button") Verstuur

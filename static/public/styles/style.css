@@ -645,20 +645,22 @@ select {
   color: #000;
   height: 80vh;
   overflow: auto;
+  min-width: 100%;
+  padding: 1em;
 }
 
 #messages li {
   list-style-type: none;
   background: #fff;
   padding: 1em;
-  max-width: 80%;
-  margin: .5em;
+  width: 100%;
+  margin: .5em 0;
   border-radius: .5em;
   align-self: flex-end;
 }
 
 .message_left {
-  background:rgb(255, 126, 126)!important;
+  /* background:rgb(255, 126, 126)!important; */
   color: #fff;
   align-self: flex-start!important;
 }
@@ -671,7 +673,7 @@ select {
 }
 
 #messages li p:nth-child(1) {
-  text-align: right;
+  text-align: left;
   font-size: 12px;
 }
 
@@ -709,8 +711,6 @@ select {
   nav a {
     padding: 0.4em 0.8em;
   }
-<<<<<<< HEAD
-=======
 
   .imgDiv P {
     bottom: 2vw;
@@ -746,5 +746,4 @@ select {
   50% { transform: rotate(-6deg); }
   75% { transform: rotate(6deg); }
   100% { transform: rotate(-6deg); }
->>>>>>> a489b1ce9ccae61638f27db60f0f87f9987091cb
 }
