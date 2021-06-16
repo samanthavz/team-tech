@@ -43,7 +43,7 @@ exports.renderRegister = (req, res) => {
 };
 
 exports.postRegister = async (req, res) => {
-  const { email, password, name, lastName, age, maxAge, img, status, breed } =
+  const { email, password, name, lastName, age, maxAge, img, status } =
     req.body;
   console.log(req.body);
   if (!email || !password || !name || !lastName || !age || !maxAge) {
