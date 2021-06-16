@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const app = express();
 const User = require("../models/user");
+const transporter = require("./mailer");
 // https://stackoverflow.com/questions/48433783/referenceerror-fetch-is-not-defined
 const fetch = require("node-fetch");
 const { DatabaseHandler } = require("../models/Model");
@@ -16,13 +17,12 @@ let breeds = [];
 
 // let api_key = "933e2e7b-e77c-4a9d-a225-91329dc556b1"
 
-funcName("https://api.thedogapi.com/v1/breeds?limit=200&page=0")
+funcName("https://api.thedogapi.com/v1/breeds?limit=200&page=0");
 async function funcName(url) {
   const response = await fetch(url);
   var data = await response.json();
-  data.forEach(item => breeds.push(item.name))
+  data.forEach((item) => breeds.push(item.name));
 }
-
 
 exports.renderWelcomePage = (req, res) => {
   res.render("welcome", {
@@ -34,14 +34,14 @@ exports.renderWelcomePage = (req, res) => {
     passport.authenticate("local", {
       successRedirect: "/userprofile",
       failureRedirect: "/login",
-    }),
-    function (req, res) {}
+    })
   );
 };
 
 exports.renderRegister = (req, res) => {
   res.render("register");
 };
+
 exports.postRegister = async (req, res) => {
   const { email, password, name, lastName, age, maxAge, img, status, breed } =
     req.body;
@@ -50,39 +50,61 @@ exports.postRegister = async (req, res) => {
     console.log("Please enter all fields");
   }
 
-  User.findOne({ email: email })
-    .then((user) => {
-      if (user) {
-        console.log("Email already exists");
-        res.render("register");
-      } else {
-        const newUser = new User({
-          email,
-          password,
-          name,
-          lastName,
-          age,
-          maxAge,
-          img,
-          status,
-          breed,
+  User.findOne({ email: email }).then((user) => {
+    if (user) {
+      console.log("Email already exists");
+      res.render("register");
+    } else {
+      const newUser = new User({
+        email,
+        password,
+        name,
+        lastName,
+        age,
+        maxAge,
+        img,
+        status,
+        breed,
+      });
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(() => {
+              console.log("✅ Registration successful!");
+              res.redirect("/home");
+            })
+            .catch((err) => console.log(err));
         });
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-              .save()
-              .then((user) => {
-                console.log("Registration successful!");
-                res.redirect("/home");
-              })
-              .catch((err) => console.log(err));
-          });
-        });
-      }
-    })
-    .catch((err) => console.log("Registration error", err.message));
+      });
+      let mailOptions = {
+        from: "🐶 DoggoSwipe 🐶 <doggoswipe@gmail.com>",
+        to: newUser.email,
+        subject: "Thanks for joining DoggoSwipe🐕",
+        text: `
+        Hey ${newUser.name}!
+        We are super happy for joining DoggoSwipe!
+        Have fun with the Doggo's 🐶!
+        `,
+        attachments: [
+          {
+            filename: "BannerThanksForJoining.png",
+            path: "./static/public/images/BannerThanksForJoining.png",
+          },
+        ],
+      };
+      transporter.sendMail(mailOptions, (err) => {
+        if (err) {
+          console.log(err);
+          return false;
+        }
+        //console.log(result);
+        console.log("📤 Email sent to %s!", newUser.name);
+      });
+    }
+  });
 };
 
 exports.postLogin = (req, res, next) => {
@@ -188,7 +210,7 @@ exports.renderProfilePage = (req, res) => {
   res.render("profile", {
     title: "Profile",
     user: user,
-    breeds
+    breeds,
   });
 };
 
