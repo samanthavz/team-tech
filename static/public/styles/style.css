@@ -40,6 +40,12 @@ footer {
 /*               Template                */
 /* ------------------------------------- */
 
+.template {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .template h1 {
   height: 10vh;
   text-align: center;
@@ -146,6 +152,7 @@ nav a:hover {
 .home {
   background-color: rgba(255, 241, 241, 0.603);
   height: 78vh;
+  max-width: 35em;
   border-radius: 3em;
   box-shadow: rgba(97, 56, 63, 0.068) 0px 2px 4px 0px,
     rgba(90, 46, 55, 0.123) 0px 2px 16px 0px;
@@ -165,10 +172,19 @@ nav a:hover {
   z-index: 2;
 }
 
+
 .home button {
   margin-top: 1em;
   border: none;
   background-color: transparent;
+}
+
+#bone:hover {
+   /* Start the shake animation and make the animation last for 0.5 seconds */
+  animation: shake 1s;
+
+  /* When the animation is finished, start again */
+  animation-iteration-count: infinite;
 }
 
 .emptyH2 {
@@ -275,8 +291,7 @@ nav a:hover {
   font-weight: 600;
 }
 
-.infoContent p:nth-of-type(2),
-.infoContent p:nth-of-type(4) {
+.infoContent p:nth-of-type(2), .infoContent p:nth-of-type(4) {
   margin-bottom: 0.5em;
 }
 
@@ -285,7 +300,7 @@ nav a:hover {
   padding: 0.5em 1em;
   margin-top: 0.5em;
   border: none;
-  background-color: #ff7d7d;
+  background-color:#ff7d7d;
   border-radius: 1em;
 }
 .infoContent button:hover {
@@ -293,7 +308,7 @@ nav a:hover {
   padding: 0.5em 1em;
   margin-top: 0.5em;
   border: none;
-  background-color: #ff7d7da6;
+  background-color:#ff7d7da6;
   border-radius: 1em;
 }
 
@@ -317,6 +332,7 @@ nav a:hover {
   font-weight: 600;
 }
 
+
 /* ------------------------------------- */
 /*            Matches.pug                */
 /* ------------------------------------- */
@@ -324,6 +340,7 @@ nav a:hover {
 ul {
   background-color: rgba(255, 241, 241, 0.603);
   height: 90vh;
+  width: 100%;
   padding-bottom: 7em;
   border-radius: 3em 3em 0 0;
   box-shadow: rgba(97, 56, 63, 0.068) 0px 2px 4px 0px,
@@ -340,13 +357,7 @@ ul::-webkit-scrollbar {
 }
 
 ul li {
-  /* border-top: 0.1em solid rgba(255, 163, 163, 0.247);
-  padding: 1em 1em 1em 0;
-  display: flex;
-  margin: 0 2.2em;
-  align-items: center;
-  width: 120vw; */
-  overflow-x: scroll;
+  overflow-x: scroll; 
   display: flex;
 
   -ms-overflow-style: none; /* IE and Edge */
@@ -411,12 +422,12 @@ li div {
 }
 
 .filter {
-  width: 80vw;
-  font-size: 1em;
+  width: 80vw; 
+  font-size: 1em; 
   padding: 12px 20px 12px 40px;
-  border: 0.1em solid rgb(255, 126, 126);
+  border: 0.1em solid rgb(255, 126, 126); 
   border-radius: 1em;
-  margin: 0 10vw 0.8em 10vw;
+  margin: 0 10vw 0.8em 10vw; 
 }
 
 /* ------------------------------------- */
@@ -424,6 +435,7 @@ li div {
 /* ------------------------------------- */
 
 @media only screen and (min-width: 1100px) {
+
   .boneImg {
     height: 10em;
   }
@@ -451,4 +463,39 @@ li div {
   nav a {
     padding: 0.4em 0.8em;
   }
+
+  .imgDiv P {
+    bottom: 2vw;
+    left: 2vw;
+  }
+
+.gender {
+  top: 3vw;
+  right: 2vw;
+  }
+}
+
+.infoContent {
+  max-height: 20em;
+  left: 10vw;
+  top: 25vh;
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1100px) {
+  .boneimg {
+    height: 10em;
+    margin-top: 2em;
+  }
+}
+
+/* ------------------------------------- */
+/*              keyframes                */
+/* ------------------------------------- */
+
+@keyframes shake {
+  0% { transform: rotate(-6deg); }
+  25% { transform: rotate(6deg); }
+  50% { transform: rotate(-6deg); }
+  75% { transform: rotate(6deg); }
+  100% { transform: rotate(-6deg); }
 }
