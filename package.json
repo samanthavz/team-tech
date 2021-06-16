@@ -5,14 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
     "start": "node index.js",
     "dev": "nodemon index.js",
     "linter": "eslint *.js"
-=======
-    "start": "nodemon index.js",
-    "linter": "eslint *.js"
->>>>>>> 9913c5a1f119fa27f1ea9561ad8f89a070f73179
   },
   "repository": {
     "type": "git",
