@@ -2,22 +2,22 @@
 //sound effects: https://www.myinstants.com/index/nl/
 
 //check connection
-console.log("script linked");
+console.log('script linked');
 
 //info popup
-const button = document.getElementById("infoButton");
-const content = document.getElementById("overlay");
-const closeIt = document.getElementById("close");
+const button = document.getElementById('infoButton');
+const content = document.getElementById('overlay');
+const closeIt = document.getElementById('close');
 
-button.addEventListener("click", showTip);
-closeIt.addEventListener("click", closeTip);
+button.addEventListener('click', showTip);
+closeIt.addEventListener('click', closeTip);
 
 function showTip() {
-  content.style.display = "block";
+  content.style.display = 'block';
 }
 
 function closeTip() {
-  content.style.display = "none";
+  content.style.display = 'none';
 }
 
 //sound eastereggs

@@ -74,18 +74,57 @@ footer {
   padding: 0.4em 1.4em 2em 1.4em;
 }
 
-.welcome a {
-  font-size: 1.5em;
-  border: 0.08em solid #ffffffb0;
-  border-radius: 0.7em;
-  width: 7em;
-  padding: 0.3em 0.6em 0.5em 0.6em;
-  text-decoration: none;
-  color: #ffffff;
-  background: #ffaaaa96;
-  z-index: 2;
+.welcome input {
+  background: #FEEDEB;
+  padding: 0.6em;
+  border: 0.1em solid #FF7D7D;
+  border-radius: 0.9em;
+  font-size: 1.1em;
+  width: 15em;
+  margin: 0.3em;
+}
+
+input::-webkit-input-placeholder {
+  color: #FF7D7D;
+}
+
+.welcome form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  z-index: 4;
   position: relative;
 }
+
+.registerBtn {
+  background: white;
+  color: #FF7D7D;
+  font-family: "Fredoka One", cursive, sans-serif;
+  font-size: 1.5em;
+  border: 0.1em solid #F6C1B9;
+  border-radius: 0.7em;
+  padding: 0.2em 2em;
+  text-decoration: none;
+  z-index: 4;
+  position: relative;
+}
+
+.Login {
+  color: #FF7D7D;
+  font-family: "Fredoka One", cursive, sans-serif;
+  font-size: 1.5em;
+  border: 0.1em solid white;
+  border-radius: 0.7em;
+  width: 11em;
+  padding: 0.2em;
+  text-decoration: none;
+  position: relative;
+  background: #ffaaaa;
+  margin: 0.6em;
+}
+
+
 
 .welcome a:hover {
   background: #fa828296;
@@ -110,6 +149,62 @@ footer {
 }
 
 /* ------------------------------------- */
+/*              register.pug                 */
+/* ------------------------------------- */
+
+
+.registerPage {
+  text-align: center;
+  padding: 2em 1em 0 1em;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.registerPage h1 {
+  margin-bottom: 1em;
+}
+
+.registerPage input {
+  background: #FEEDEB;
+  padding: 0.6em;
+  border: 0.1em solid #FF7D7D;
+  border-radius: 0.9em;
+  font-size: 1.1em;
+  width: 15em;
+  margin: 0.3em;
+}
+
+input::-webkit-input-placeholder {
+  color: #FF7D7D;
+}
+
+.registerPage form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  z-index: 4;
+  position: relative;
+}
+
+.registerBtn2 {
+  background: white;
+  color: #FF7D7D;
+  font-family: "Fredoka One", cursive, sans-serif;
+  font-size: 1.5em;
+  border: 0.1em solid #F6C1B9;
+  border-radius: 0.7em;
+  width: 11em;
+  padding: 0.2em;
+  text-decoration: none;
+  z-index: 4;
+  position: relative;
+  margin-top: 1em;
+}
+
+/* ------------------------------------- */
 /*            Navigatie Bar              */
 /* ------------------------------------- */
 
@@ -125,7 +220,7 @@ nav {
 }
 
 nav div {
-  background-color: rgba(255, 241, 241, 0.603);
+  background-color: rgba(253, 228, 228, 0.9);
   padding: 0 2.5em;
   border-radius: 3em 3em 0 0;
   border: 0.01em solid rgba(255, 255, 255, 0.397);
@@ -161,7 +256,7 @@ nav a:hover {
   text-align: center;
 }
 
-.home > div {
+.home>div {
   background-color: rgba(255, 241, 241, 0.747);
   height: 55vh;
   border-radius: 3em;
@@ -238,7 +333,7 @@ nav a:hover {
   font-size: 1.2em;
 }
 
-.info > p {
+.info>p {
   flex-grow: 1;
   text-align: right;
   font-size: 1.2em;
@@ -303,6 +398,7 @@ nav a:hover {
   background-color:#ff7d7d;
   border-radius: 1em;
 }
+
 .infoContent button:hover {
   font-size: 1.1em;
   padding: 0.5em 1em;
@@ -347,9 +443,12 @@ ul {
     rgba(90, 46, 55, 0.123) 0px 2px 16px 0px;
   overflow-y: scroll;
 
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
+
 /* see https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp*/
 /* Hide scrollbar for Chrome, Safari and Opera */
 ul::-webkit-scrollbar {
@@ -360,8 +459,10 @@ ul li {
   overflow-x: scroll; 
   display: flex;
 
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 ul li::-webkit-scrollbar {
@@ -431,6 +532,91 @@ li div {
 }
 
 /* ------------------------------------- */
+/*            Profile.pug                */
+/* ------------------------------------- */
+
+.profile {
+  height: 90vh;
+  overflow-y: scroll;
+  border-radius: 3em 3em 0 0;
+}
+.profile > div {
+  width: 100vw;
+  background-color: rgb(255, 126, 126);
+  border-radius: 3em 3em 0 0;
+  text-align: center;
+  padding: 1em;
+}
+
+.profile > div h2 {
+  color: white
+}
+
+.profile > div p {
+  color: rgba(255, 255, 255, 0.781)
+}
+
+.profile img {
+  width: 6em;
+  height: 6em;
+  border-radius: 3em;
+  object-fit: cover;
+  border: 0.2em solid white;
+}
+
+.profile > form {
+  display: flex;
+  flex-direction: column;
+  padding: 1em 2.2em 1em 2.2em;
+  height: 115%;
+}
+
+.profile > form h3 {
+  font-size: 1.4em;
+  margin: 0.2em 0 0.8em 0;
+}
+
+.profile > form label {
+  color: black;
+  letter-spacing: 0.01em;
+  margin: 0.5em 0 0.3em 0;
+}
+
+.profile > form input, .profile > form select {
+  border-radius: 0.7em;
+  border: none;
+  font-size: 0.93em;
+  padding: 0.7em 1em;
+  box-shadow: rgba(158, 54, 71, 0.212) 0px 2px 4px 0px,
+    rgba(143, 49, 68, 0.226) 0px 2px 16px 0px;
+  margin-bottom: 0.5em;
+}
+
+
+.divider {
+  height: 0.1em;
+  background-color:rgba(255, 126, 126, 0.623);
+  margin: 2em 0 1.3em 0;
+}
+
+.profile-button {
+max-width: 10em;
+padding: 0.8em 1em;
+border: none;
+margin-top: 2em;
+box-shadow: rgba(158, 54, 71, 0.212) 0px 2px 4px 0px,
+    rgba(143, 49, 68, 0.226) 0px 2px 16px 0px;
+background-color: rgb(255, 126, 126);
+color: white;
+font-size: 1em;
+border-radius: 0.7em;
+}
+
+select {
+  width: 100%;
+}
+
+/* ------------------------------------- */
 /*           media queries               */
 /* ------------------------------------- */
 
@@ -439,6 +625,7 @@ li div {
   .boneImg {
     height: 10em;
   }
+
   .welcome h1 {
     font-size: 4.5em;
   }
