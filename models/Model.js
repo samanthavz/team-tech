@@ -68,8 +68,7 @@ exports.DatabaseHandler = class {
   
     return chatMessages;
   }
-  
-};
+
   async editProfile(req) {
     const database = this.client.db("DoggoSwipe");
     const collection = database.collection("Users");
