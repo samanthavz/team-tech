@@ -78,12 +78,11 @@ exports.postLogin = (req, res, next) => {
 exports.renderHomePage = async (req, res) => {
   try {
     const user = req.user
-
     let queryBreed = {};
     if (user.breed && Array.isArray(user.breed)) {
-      queryBreed = { breed: user.breed}
+      queryBreed = { breed: {$in: user.breed}}
     } else if (user.breed && !Array.isArray(user.breed)) {
-      queryBreed = { breed: [user.breed]}
+      queryBreed = { breed: {$in: [user.breed]}}
     }
 
     let queryAge = {};
@@ -95,7 +94,7 @@ exports.renderHomePage = async (req, res) => {
 
     const filterQuery = {...queryBreed, ...queryAge, ...queryLikedOrDisliked};
     const doggoList = await database.fetchDoggos(filterQuery);
-  
+    
     res.render("home", { title: "DoggoSwipe", doggo: doggoList[0] });
   } catch (error) {
     console.error(error);
@@ -135,9 +134,9 @@ exports.likedMatch = async (req, res) => {
     const currentUser = await User.findById(user._id);
     let queryBreed = {};
     if (user.breed && Array.isArray(user.breed)) {
-      queryBreed = { breed: user.breed}
+      queryBreed = { breed: {$in: user.breed}}
     } else if (user.breed && !Array.isArray(user.breed)) {
-      queryBreed = { breed: [user.breed]}
+      queryBreed = { breed: {$in: [user.breed]}}
     }
 
     let queryAge = {};
@@ -146,13 +145,15 @@ exports.likedMatch = async (req, res) => {
     }
   
     let queryLikedOrDisliked = {$and: [{userId: {$nin:user.likedDoggos}}, {userId: {$nin:user.dislikedDoggos}}]}
-    console.log(queryLikedOrDisliked)
+
     const filterQuery = {...queryBreed, ...queryAge, ...queryLikedOrDisliked};
     const doggoList = await database.fetchDoggos(filterQuery);
-  
     
     liked.push(doggoList[0]);
     currentUser.likedDoggos.push(doggoList[0]);
+    // let liked = currentUser.likedDoggos
+    console.log(user.likedDoggos)
+
     await currentUser.save();
   } catch (error) {
     console.log(error);
