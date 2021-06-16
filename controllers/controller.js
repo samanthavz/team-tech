@@ -64,7 +64,6 @@ exports.postRegister = async (req, res) => {
         maxAge,
         img,
         status,
-        breed,
       });
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {

@@ -66,15 +66,22 @@ exports.DatabaseHandler = class {
     // https://stackoverflow.com/questions/8233014/how-do-i-search-for-an-object-by-its-objectid-in-the-mongo-console
     let o_id = new ObjectId(Id);
     let data = req.body;
+    let chosenBreeds
 
+    if (typeof req.body.breed === "string") {
+      chosenBreeds = [req.body.breed];
+    } else {
+      chosenBreeds = req.body.breed;
+    }
+    
     for (const item in data) {
       let update = `${data[item]}`;
       // console.log(item);
       if (item === "breed") {
-        collection.findOneAndUpdate(
-          { _id: o_id },
-          { $push: { [item]: update } }
-        );
+          collection.findOneAndUpdate(
+            { _id: o_id },
+            { $set: {breed: chosenBreeds} }
+          )
       } else {
         await collection.findOneAndUpdate(
           { _id: o_id },
@@ -84,3 +91,5 @@ exports.DatabaseHandler = class {
     }
   }
 };
+
+
