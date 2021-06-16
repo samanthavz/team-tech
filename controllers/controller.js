@@ -5,11 +5,24 @@ const passport = require("passport");
 const app = express();
 const User = require("../models/user");
 const transporter = require("./mailer");
+// https://stackoverflow.com/questions/48433783/referenceerror-fetch-is-not-defined
+const fetch = require("node-fetch");
 const { DatabaseHandler } = require("../models/Model");
 const database = new DatabaseHandler();
+
 let liked = [];
 let doggoList = [];
 let profile = [];
+let breeds = [];
+
+// let api_key = "933e2e7b-e77c-4a9d-a225-91329dc556b1"
+
+funcName("https://api.thedogapi.com/v1/breeds?limit=200&page=0");
+async function funcName(url) {
+  const response = await fetch(url);
+  var data = await response.json();
+  data.forEach((item) => breeds.push(item.name));
+}
 
 exports.renderWelcomePage = (req, res) => {
   res.render("welcome", {
@@ -197,6 +210,7 @@ exports.renderProfilePage = (req, res) => {
   res.render("profile", {
     title: "Profile",
     user: user,
+    breeds,
   });
 };
 
