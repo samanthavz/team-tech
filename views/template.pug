@@ -1,0 +1,18 @@
+doctype html
+html
+  include includes/head.pug
+  body(class="template")
+    +info
+    h1 #{title}
+    block content
+    nav 
+        div
+            a(href="/home")
+                img(src="images/home.png" alt="home icon")
+            a(href="/matches")
+                img(src="images/matches.png" alt="matches icon")
+            a(href="/profile")
+                img(src="images/profile.png" alt="profile icon")
+            a(href="")
+                img(src="images/settings.png" alt="settings icon")
+    script(src="scripts/script.js", type="module")

@@ -1,0 +1,454 @@
+/*-----------------------------------------*/
+/*wat algemene stuff wat overal voor geldt */
+/*-----------------------------------------*/
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  max-height: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  height: 100vh;
+  min-width: 100vw;
+  color: #ff7d7d;
+  background-image: url(./images/background1.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  user-select: none;
+  overflow: hidden;
+  overflow-y: hidden;
+  position: relative;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+}
+
+/* ------------------------------------- */
+/*               Template                */
+/* ------------------------------------- */
+
+.template h1 {
+  height: 10vh;
+  text-align: center;
+  padding: 0.4em 0;
+}
+
+/* ------------------------------------- */
+/*             welcome.pug               */
+/* ------------------------------------- */
+
+.welcome {
+  text-align: center;
+  padding: 2em 1em 0 1em;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.welcome h1 {
+  font-size: 3.5em;
+}
+
+.welcome p {
+  font-size: 1.5em;
+  padding: 0.4em 1.4em 2em 1.4em;
+}
+
+.welcome a {
+  font-size: 1.5em;
+  border: 0.08em solid #ffffffb0;
+  border-radius: 0.7em;
+  width: 7em;
+  padding: 0.3em 0.6em 0.5em 0.6em;
+  text-decoration: none;
+  color: #ffffff;
+  background: #ffaaaa96;
+  z-index: 2;
+  position: relative;
+}
+
+.welcome a:hover {
+  background: #fa828296;
+}
+
+.doggoPic {
+  position: absolute;
+  bottom: 0;
+  left: 1em;
+  /* original img 300x300 px */
+  height: 190px;
+  width: 200px;
+  z-index: 2;
+}
+
+.wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+/* ------------------------------------- */
+/*            Navigatie Bar              */
+/* ------------------------------------- */
+
+nav {
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+}
+
+nav div {
+  background-color: rgba(255, 241, 241, 0.603);
+  padding: 0 2.5em;
+  border-radius: 3em 3em 0 0;
+  border: 0.01em solid rgba(255, 255, 255, 0.397);
+  box-shadow: rgba(97, 56, 63, 0.068) 0px 2px 4px 0px,
+    rgba(90, 46, 55, 0.123) 0px 2px 16px 0px;
+}
+
+nav a {
+  display: inline-block;
+  padding: 1.3em;
+  text-decoration: none;
+  font-size: 2.2vw;
+}
+
+nav a:hover {
+  background: #ffe1d89a;
+  border-radius: 0.5em;
+}
+
+/* ------------------------------------- */
+/*              Home.pug                 */
+/* ------------------------------------- */
+
+.home {
+  background-color: rgba(255, 241, 241, 0.603);
+  height: 78vh;
+  border-radius: 3em;
+  box-shadow: rgba(97, 56, 63, 0.068) 0px 2px 4px 0px,
+    rgba(90, 46, 55, 0.123) 0px 2px 16px 0px;
+  margin: 0 1em;
+  padding-top: 1em;
+  text-align: center;
+}
+
+.home > div {
+  background-color: rgba(255, 241, 241, 0.747);
+  height: 55vh;
+  border-radius: 3em;
+  box-shadow: rgba(158, 85, 97, 0.158) 0px 2px 4px 0px,
+    rgba(160, 75, 92, 0.247) 0px 2px 16px 0px;
+  margin: 0 1.5em;
+  text-align: left;
+  z-index: 2;
+}
+
+.home button {
+  margin-top: 1em;
+  border: none;
+  background-color: transparent;
+}
+
+.emptyH2 {
+  text-align: center;
+  margin-top: 2em;
+  padding: 0 2em;
+  font-size: 1.2em;
+}
+
+.image {
+  width: 100%;
+  height: 42vh;
+  border-radius: 3em;
+  object-fit: cover;
+}
+
+.imgDiv {
+  position: relative;
+}
+
+.imgDiv P {
+  position: absolute;
+  bottom: 5vw;
+  left: 5vw;
+  font-size: 1.9em;
+  font-weight: 700;
+}
+
+.gender {
+  position: absolute;
+  top: 6vw;
+  right: 5vw;
+  height: 4em;
+}
+
+.info {
+  display: flex;
+  flex-direction: row;
+  padding: 0 2em;
+}
+
+.info div {
+  flex-grow: 1;
+}
+
+.info div h2 {
+  font-size: 1.9em;
+}
+
+.info div p {
+  font-size: 1.2em;
+}
+
+.info > p {
+  flex-grow: 1;
+  text-align: right;
+  font-size: 1.2em;
+  margin-top: 0.4em;
+}
+
+.infoButton {
+  position: absolute;
+  top: 1em;
+  right: 6vw;
+  width: 3.6em;
+  height: 3.6em;
+  background-color: transparent;
+  border: none;
+}
+
+.infoButton img {
+  width: 100%;
+}
+
+.infoContent {
+  position: absolute;
+  /* background-color: white; */
+  background-image: url(../images/textArea.svg);
+  background-repeat: no-repeat;
+  top: 15vh;
+  right: -10vw;
+  height: 70vh;
+  width: 110vw;
+  padding: 2em 0;
+}
+
+.infoContent h2,
+.infoContent p,
+.infoContent button {
+  margin-left: 50px;
+}
+
+.infoContent h2 {
+  font-size: 2em;
+  margin-bottom: 0.5em;
+}
+
+.infoContent p {
+  font-size: 1.1em;
+}
+
+.infoContent p:first-of-type,
+.infoContent p:nth-of-type(3) {
+  font-weight: 600;
+}
+
+.infoContent p:nth-of-type(2),
+.infoContent p:nth-of-type(4) {
+  margin-bottom: 0.5em;
+}
+
+.infoContent button {
+  font-size: 1.1em;
+  padding: 0.5em 1em;
+  margin-top: 0.5em;
+  border: none;
+  background-color: #ff7d7d;
+  border-radius: 1em;
+}
+.infoContent button:hover {
+  font-size: 1.1em;
+  padding: 0.5em 1em;
+  margin-top: 0.5em;
+  border: none;
+  background-color: #ff7d7da6;
+  border-radius: 1em;
+}
+
+.infoImg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40vh;
+}
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.507);
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  z-index: 2;
+  position: absolute;
+}
+
+.disliked {
+  font-weight: 600;
+}
+
+/* ------------------------------------- */
+/*            Matches.pug                */
+/* ------------------------------------- */
+
+ul {
+  background-color: rgba(255, 241, 241, 0.603);
+  height: 90vh;
+  padding-bottom: 7em;
+  border-radius: 3em 3em 0 0;
+  box-shadow: rgba(97, 56, 63, 0.068) 0px 2px 4px 0px,
+    rgba(90, 46, 55, 0.123) 0px 2px 16px 0px;
+  overflow-y: scroll;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+/* see https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp*/
+/* Hide scrollbar for Chrome, Safari and Opera */
+ul::-webkit-scrollbar {
+  display: none;
+}
+
+ul li {
+  /* border-top: 0.1em solid rgba(255, 163, 163, 0.247);
+  padding: 1em 1em 1em 0;
+  display: flex;
+  margin: 0 2.2em;
+  align-items: center;
+  width: 120vw; */
+  overflow-x: scroll;
+  display: flex;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+ul li::-webkit-scrollbar {
+  display: none;
+}
+
+ul li:first-of-type {
+  border-top: none;
+}
+
+li img {
+  width: 5em;
+  height: 5em;
+  border-radius: 3em;
+  object-fit: cover;
+}
+
+li div {
+  flex-grow: 1;
+  margin-left: 1em;
+}
+
+.emptyP {
+  text-align: center;
+  margin-top: 1em;
+  font-size: 1.2em;
+}
+
+.content {
+  color: #ff7d7dbb;
+}
+
+.delete {
+  margin: 0;
+  padding: 0;
+  max-width: 5em;
+  margin-right: -5em;
+  background-color: rgb(255, 47, 47);
+  text-align: center;
+}
+
+.delete button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.1em;
+  margin-top: 50%;
+  color: white;
+  font-weight: 600;
+}
+
+.listContainer {
+  border-top: 0.1em solid rgba(255, 163, 163, 0.247);
+  padding: 1em 1em 1em 0;
+  display: flex;
+  margin: 0 2.2em;
+  align-items: center;
+  overflow-x: scroll;
+}
+
+.filter {
+  width: 80vw;
+  font-size: 1em;
+  padding: 12px 20px 12px 40px;
+  border: 0.1em solid rgb(255, 126, 126);
+  border-radius: 1em;
+  margin: 0 10vw 0.8em 10vw;
+}
+
+/* ------------------------------------- */
+/*           media queries               */
+/* ------------------------------------- */
+
+@media only screen and (min-width: 1100px) {
+  .boneImg {
+    height: 10em;
+  }
+  .welcome h1 {
+    font-size: 4.5em;
+  }
+
+  .welcome p {
+    font-size: 2em;
+  }
+
+  .welcome a {
+    font-size: 1.7em;
+  }
+
+  .doggoPic {
+    height: 310px;
+    width: 320px;
+  }
+
+  .wave {
+    height: 70vh;
+  }
+
+  nav a {
+    padding: 0.4em 0.8em;
+  }
+}
