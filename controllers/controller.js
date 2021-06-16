@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const app = express();
 const User = require("../models/user");
+const transporter = require("./mailer");
 const { DatabaseHandler } = require("../models/Model");
 const database = new DatabaseHandler();
 let liked = [];
@@ -20,14 +21,14 @@ exports.renderWelcomePage = (req, res) => {
     passport.authenticate("local", {
       successRedirect: "/userprofile",
       failureRedirect: "/login",
-    }),
-    function (req, res) {}
+    })
   );
 };
 
 exports.renderRegister = (req, res) => {
   res.render("register");
 };
+
 exports.postRegister = async (req, res) => {
   const { email, password, name, lastName, age, maxAge, img, status, breed } =
     req.body;
@@ -36,39 +37,61 @@ exports.postRegister = async (req, res) => {
     console.log("Please enter all fields");
   }
 
-  User.findOne({ email: email })
-    .then((user) => {
-      if (user) {
-        console.log("Email already exists");
-        res.render("register");
-      } else {
-        const newUser = new User({
-          email,
-          password,
-          name,
-          lastName,
-          age,
-          maxAge,
-          img,
-          status,
-          breed,
+  User.findOne({ email: email }).then((user) => {
+    if (user) {
+      console.log("Email already exists");
+      res.render("register");
+    } else {
+      const newUser = new User({
+        email,
+        password,
+        name,
+        lastName,
+        age,
+        maxAge,
+        img,
+        status,
+        breed,
+      });
+      bcrypt.genSalt(10, (err, salt) => {
+        bcrypt.hash(newUser.password, salt, (err, hash) => {
+          if (err) throw err;
+          newUser.password = hash;
+          newUser
+            .save()
+            .then(() => {
+              console.log("✅ Registration successful!");
+              res.redirect("/home");
+            })
+            .catch((err) => console.log(err));
         });
-        bcrypt.genSalt(10, (err, salt) => {
-          bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser
-              .save()
-              .then((user) => {
-                console.log("Registration successful!");
-                res.redirect("/home");
-              })
-              .catch((err) => console.log(err));
-          });
-        });
-      }
-    })
-    .catch((err) => console.log("Registration error", err.message));
+      });
+      let mailOptions = {
+        from: "🐶 DoggoSwipe 🐶 <doggoswipe@gmail.com>",
+        to: newUser.email,
+        subject: "Thanks for joining DoggoSwipe🐕",
+        text: `
+        Hey ${newUser.name}!
+        We are super happy for joining DoggoSwipe!
+        Have fun with the Doggo's 🐶!
+        `,
+        attachments: [
+          {
+            filename: "BannerThanksForJoining.png",
+            path: "./static/public/images/BannerThanksForJoining.png",
+          },
+        ],
+      };
+      transporter.sendMail(mailOptions, (err) => {
+        if (err) {
+          console.log(err);
+          return false;
+        }
+        //console.log(result);
+        console.log("📤 Email sent to %s!", newUser.name);
+      });
+    }
+  });
 };
 
 exports.postLogin = (req, res, next) => {
