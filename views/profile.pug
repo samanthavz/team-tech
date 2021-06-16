@@ -21,16 +21,11 @@ block content
        label(for="dogAge") Max dog age
        input(type="number" id="dogAge" name="maxAge" value=user.maxAge)
        label(for="breed") preferred breeds
-       div(class="col-sm-2")
-        select(name="breed", id="breed", multiple="multiple", size="3")
-          each breed in breeds
-            +ras(breed.name)
+       select(name="breed", id="breed", multiple="multiple", size="5")
+         each breed in breeds
+           +ras(breed)
        input(type="hidden", name="userId", value=user._id)
        button(type="submit", class="profile-button") Submit edit
 
   script(src="scripts/profile.js", type="module")
-  script(src="https://unpkg.com/multiple-select@1.5.2/dist/multiple-select.min.js")
-  script(src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js")
-  script.
-     document.getElementsByTagName("select").multipleSelect({multiple: true, multipleWidth: 60,});
   

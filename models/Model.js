@@ -69,11 +69,18 @@ exports.DatabaseHandler = class {
 
     for (const item in data) {
       let update = `${data[item]}`;
-      console.log(item);
-      await collection.findOneAndUpdate(
-        { _id: o_id },
-        { $set: { [item]: update } }
-      );
+      // console.log(item);
+      if (item === "breed") {
+        collection.findOneAndUpdate(
+          { _id: o_id },
+          { $push: { [item]: update } }
+        );
+      } else {
+        await collection.findOneAndUpdate(
+          { _id: o_id },
+          { $set: { [item]: update } }
+        );
+      }
     }
   }
 };

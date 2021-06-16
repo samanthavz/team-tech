@@ -20,9 +20,8 @@ funcName("https://api.thedogapi.com/v1/breeds?limit=200&page=0")
 async function funcName(url) {
   const response = await fetch(url);
   var data = await response.json();
-  data.forEach(item => breeds.push(item))
+  data.forEach(item => breeds.push(item.name))
 }
-
 
 
 exports.renderWelcomePage = (req, res) => {

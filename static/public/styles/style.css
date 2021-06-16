@@ -214,7 +214,7 @@ nav {
 }
 
 nav div {
-  background-color: rgba(255, 241, 241, 0.603);
+  background-color: rgba(253, 228, 228, 0.9);
   padding: 0 2.5em;
   border-radius: 3em 3em 0 0;
   border: 0.01em solid rgba(255, 255, 255, 0.397);
@@ -557,7 +557,7 @@ li div {
   display: flex;
   flex-direction: column;
   padding: 1em 2.2em 1em 2.2em;
-  height: 110%;
+  height: 115%;
 }
 
 .profile > form h3 {
@@ -571,14 +571,16 @@ li div {
   margin: 0.5em 0 0.3em 0;
 }
 
-.profile > form input {
+.profile > form input, .profile > form select {
   border-radius: 0.7em;
   border: none;
   font-size: 0.93em;
   padding: 0.7em 1em;
   box-shadow: rgba(158, 54, 71, 0.212) 0px 2px 4px 0px,
     rgba(143, 49, 68, 0.226) 0px 2px 16px 0px;
+  margin-bottom: 0.5em;
 }
+
 
 .divider {
   height: 0.1em;
