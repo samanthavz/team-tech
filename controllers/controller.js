@@ -146,22 +146,16 @@ exports.likedMatch = async (req, res) => {
     }
   
     let queryLikedOrDisliked = {$and: [{userId: {$nin:user.likedDoggos}}, {userId: {$nin:user.dislikedDoggos}}]}
-
+    console.log(queryLikedOrDisliked)
     const filterQuery = {...queryBreed, ...queryAge, ...queryLikedOrDisliked};
-    const doggoList = await database.fetchDoggos(filterQuery);
-
+    const doggoList = await database.fetchDoggos(filterQuery);  
+    
     user.likedDoggos.push(doggoList[0]);
-    // let liked = user.likedDoggos
-    // liked.push(doggoList[0]);
-    // console.log(liked)
 
     await user.save();
+    res.redirect("/home");
   } catch (error) {
     console.log(error);
-  }
-  setTimeout(redirect, 1500);
-  function redirect() {
-    res.redirect("/home");
   }
 };
 
