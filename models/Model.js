@@ -78,15 +78,10 @@ exports.DatabaseHandler = class {
       let update = `${data[item]}`;
       // console.log(item);
       if (item === "breed") {
-
-        // collection.findOneAndUpdate({ _id: o_id }, { $set: { breed: [] } });
-
-        
           collection.findOneAndUpdate(
             { _id: o_id },
             { $set: {breed: chosenBreeds} }
           )
-        
       } else {
         await collection.findOneAndUpdate(
           { _id: o_id },
