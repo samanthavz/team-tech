@@ -6,7 +6,6 @@ const app = express();
 const User = require("../models/user");
 const { DatabaseHandler } = require("../models/Model");
 const database = new DatabaseHandler();
-let liked = [];
 let doggoList = [];
 
 exports.renderWelcomePage = (req, res) => {
@@ -102,6 +101,8 @@ exports.renderHomePage = async (req, res) => {
 };
 
 exports.renderMatchesPage = (req, res) => {
+  user = req.user
+  let liked = user.likedDoggos
   res.render("matches", {
     title: "Doggo Matches",
     liked,
@@ -131,7 +132,7 @@ exports.deleteMatch = async (req, res) => {
 exports.likedMatch = async (req, res) => {
   try {
     const user = req.user;
-    const currentUser = await User.findById(user._id);
+    // const currentUser = await User.findById(user._id);
     let queryBreed = {};
     if (user.breed && Array.isArray(user.breed)) {
       queryBreed = { breed: {$in: user.breed}}
@@ -148,13 +149,13 @@ exports.likedMatch = async (req, res) => {
 
     const filterQuery = {...queryBreed, ...queryAge, ...queryLikedOrDisliked};
     const doggoList = await database.fetchDoggos(filterQuery);
-    
-    liked.push(doggoList[0]);
-    currentUser.likedDoggos.push(doggoList[0]);
-    // let liked = currentUser.likedDoggos
-    console.log(user.likedDoggos)
 
-    await currentUser.save();
+    user.likedDoggos.push(doggoList[0]);
+    // let liked = user.likedDoggos
+    // liked.push(doggoList[0]);
+    // console.log(liked)
+
+    await user.save();
   } catch (error) {
     console.log(error);
   }
