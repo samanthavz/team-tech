@@ -3,8 +3,8 @@ extends template.pug
 block content
   div.profile
     div 
-      img(src=user.img, alt="profile picture")
-      h2 #{user.name} #{user.lastname}
+      img(src="./images/profilepic.jpg", alt="profile picture")
+      h2 #{user.name} #{user.lastName}
       p #{user.status} 
     //- formulier voor profile editten: user info
     form(action="/profile/edit", method="post",)

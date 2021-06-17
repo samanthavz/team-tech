@@ -578,7 +578,7 @@ li div {
   display: flex;
   flex-direction: column;
   padding: 1em 2.2em 1em 2.2em;
-  height: 115%;
+  height: 125%;
 }
 
 .profile > form h3 {

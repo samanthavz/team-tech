@@ -41,7 +41,7 @@ const UserSchema = new mongoose.Schema(
       required: false,
     },
     breed: {
-      trype: String,
+      type: Array,
       required: false,
     },
   },

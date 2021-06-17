@@ -17,8 +17,8 @@ let breeds = [];
 
 // let api_key = "933e2e7b-e77c-4a9d-a225-91329dc556b1"
 
-funcName("https://api.thedogapi.com/v1/breeds?limit=200&page=0");
-async function funcName(url) {
+apiFetch("https://api.thedogapi.com/v1/breeds?limit=200&page=0");
+async function apiFetch(url) {
   const response = await fetch(url);
   var data = await response.json();
   data.forEach((item) => breeds.push(item.name));
@@ -43,7 +43,7 @@ exports.renderRegister = (req, res) => {
 };
 
 exports.postRegister = async (req, res) => {
-  const { email, password, name, lastName, age, maxAge, img, status, breed } =
+  const { email, password, name, lastName, age, maxAge, img, status } =
     req.body;
   console.log(req.body);
   if (!email || !password || !name || !lastName || !age || !maxAge) {
@@ -64,7 +64,6 @@ exports.postRegister = async (req, res) => {
         maxAge,
         img,
         status,
-        breed,
       });
       bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
