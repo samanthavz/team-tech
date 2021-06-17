@@ -7,10 +7,6 @@ const msgSchema = new mongoose.Schema({
     timeNow: {
         type: String,
         required: true
-    },
-    user: {
-        type: String,
-        required: true
     }
 })
 

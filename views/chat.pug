@@ -5,14 +5,17 @@ html
     +info
 
     h1 #{title}
-    a(href="/matches")
+    a.back_button(href="/")
                 img(src="images/arrow.svg" alt="back icon")
     block content
       //- chatbar 
       div(id="messages")
         -chats
+            li
+                  p=(chats.timeNow)
+                  p=('Hallo ' + userNow.name + ', Welkom in de Asielchat! Heb je vragen over een hond of wil je contact opnemen, stuur dan zeker een berichtje!')
             each message in chats
-              if message.user != message.user
+              if userNow.name == "Doggo Asiel"
                 li.message_left
                   p=(message.timeNow)
                   p=(message.msg)

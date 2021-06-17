@@ -25,7 +25,7 @@ form.addEventListener('submit', (e) => {
 
 function outputMessage(message) {
     const li = document.createElement('li');
-    li.innerHTML = `<p> ${message.user} - ${message.timeNow} </p>
+    li.innerHTML = `<p>${message.timeNow} </p>
     <p class="text">
         ${message.msg}
     </p>`

@@ -13,7 +13,7 @@ const io = socketio(server);
 require("./controllers/passport")(passport);
 const mongoose = require('mongoose');
 const Msg = require('./static/public/scripts/messages.js');
-const User = require("./models/user");
+const User = require('./models/user.js');
 mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopology: true}).then(() => {
   console.log('connected');
 }).catch(err => console.log(err))
@@ -22,21 +22,6 @@ mongoose.connect(process.env.DB_CONNECT, { useNewUrlParser: true, useUnifiedTopo
 app.set("views", "views");
 app.set("view engine", "pug");
 app.use(express.static(__dirname + "/static/public/"));
-
-// run when client connects || Werkt niet in MVC omdat socket direct bij de server.listen PORT moet zijn
-io.on('connection', socket => {
-  Msg.find()
-  User.find()
-  socket.on('chatMessage', (msg, timeNow, user) => {
-    user = "gebruiker"
-    time = new Date();
-    timeNow = time.getHours() + `:` + (time.getMinutes()<10?'0':'') + time.getMinutes();
-    const newMessage = new Msg({msg, timeNow, user})
-    newMessage.save().then(() => {
-      io.emit('message', {msg, timeNow, user})
-    })
-  })
-})
 
 app.use(
   session({
@@ -51,6 +36,19 @@ app.use(
     extended: false,
   })
 );
+
+// run when client connects || Werkt niet in MVC omdat socket direct bij de server.listen PORT moet zijn
+io.on('connection', socket => {
+  Msg.find()
+  socket.on('chatMessage', (msg, timeNow) => {
+    time = new Date();
+    timeNow = time.getHours() + `:` + (time.getMinutes()<10?'0':'') + time.getMinutes();
+    const newMessage = new Msg({msg, timeNow})
+    newMessage.save().then(() => {
+      io.emit('message', {msg, timeNow})
+    })
+  })
+})
 
 // For parsing nested JSON objects
 // see https://medium.com/@mmajdanski/express-body-parser-and-why-may-not-need-it-335803cd048c

@@ -216,9 +216,9 @@ exports.renderProfilePage = (req, res) => {
 
 exports.renderChatPage = async (req, res) => {
   const chats = await (await database.fetchChats()).toArray();
-  const user = req.user;
+  const userNow = req.user
   res.render("chat", {
-    title: "Asielchat", chats, user: user
+    title: "Asielchat", chats, userNow: userNow
   });
 };
 
