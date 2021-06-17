@@ -1,0 +1,31 @@
+doctype html
+html
+  include includes/head.pug
+  body(class="template")
+    +info
+
+    h1 #{title}
+    a.back_button(href="/")
+                img(src="images/arrow.svg" alt="back icon")
+    block content
+      //- chatbar 
+      div(id="messages")
+        -chats
+            li
+                  p=(chats.timeNow)
+                  p=('Hallo ' + userNow.name + ', Welkom in de Asielchat! Heb je vragen over een hond of wil je contact opnemen, stuur dan zeker een berichtje!')
+            each message in chats
+              if userNow.name == "Doggo Asiel"
+                li.message_left
+                  p=(message.timeNow)
+                  p=(message.msg)
+              else 
+                li
+                  p=(message.timeNow)
+                  p=(message.msg)
+      form(id="send-container")
+        input(type="text" id="msg" autocomplete="off" class="doggoMessage" placeholder="Type een bericht ...")
+        button(type="submit" id="send-button") Verstuur
+          //- text
+      script(src="/socket.io/socket.io.js", type="module")
+      script(src="scripts/chat.js", type="module")

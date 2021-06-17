@@ -15,6 +15,7 @@ router.post("/matches/liked", lAuth, controller.likedMatch);
 router.post("/matches/disliked", lAuth, controller.dislikedMatch);
 router.get("/profile", lAuth, controller.renderProfilePage);
 router.post("/profile/edit", controller.editProfilePage);
+router.get('/chat', controller.renderChatPage);
 
 //error handling
 router.use((req, res, next) => {
